@@ -14,6 +14,7 @@ string tolower_for_str(string x)
     return y;
 }
 
+
 int main()
 {
     string text;
@@ -23,7 +24,7 @@ int main()
     havetext = getline(read,text);
     vector<string> list_name;
     vector<int> list_score;
-    vector<char> list_grade;
+    vector<string> list_grade;
     
     while(havetext)
     {
@@ -36,7 +37,7 @@ int main()
         list_score.push_back(b);
         list_score.push_back(c);
         int sum = a+b+c;
-        char grade;
+        string grade;
         if(sum >= 80)
         {
             grade = 'A';
@@ -72,13 +73,20 @@ int main()
         else if(commandtext.substr(0,6) == "grade ")
         {
             string key = commandtext.substr(6,7);
+            key = tolower_for_str(key);
+            vector<string> newgrade(26);
+            for(int j = 0;j < 26;j++)
+            {
+                newgrade[j] = tolower_for_str(list_grade[j]);
+            }
             for(int i = 0; i < 26;i++)
             {
-                if(list_grade[i] == key[0])
+                if(newgrade[i] == key)
                 {
                     cout << list_name[i] << "\n";
                 }
             }
+            cout << "--------------------------------------" << "\n";
         }
         else if(commandtext.substr(0,5) == "name ")
         {
