@@ -67,11 +67,13 @@ int main()
         string commandtext;
         cout << "Please input your command :";
         getline(cin,commandtext);
-        cout << "--------------------------------------" << "\n";
-
+        cout << "--------------------------------------\n";
+        string newtext = tolower_for_str(commandtext);
+ 
         if(commandtext == "exit") break;
         else if(commandtext.substr(0,6) == "grade ")
         {
+        	int num = 0;
             string key = commandtext.substr(6,7);
             key = tolower_for_str(key);
             vector<string> newgrade(26);
@@ -85,11 +87,20 @@ int main()
                 {
                     cout << list_name[i] << "\n";
                 }
+                if(newgrade[i] != key)
+                {
+                	num++;
+				}
             }
-            cout << "--------------------------------------" << "\n";
+            cout << "--------------------------------------\n";
+            if(num == 26)
+            {
+            	cout << "Cannot found.\n";
+			}
         }
-        else if(commandtext.substr(0,5) == "name ")
+        else if(newtext.substr(0,5) == "name ")
         {
+        	int count = 0;
             string word = commandtext.substr(5,90);
             word = tolower_for_str(word);
             vector<string> newname(26);
@@ -103,8 +114,20 @@ int main()
                 {
                     cout << list_name[i] << "'s grade = " << list_grade[i] << "\n";
                     cout << "--------------------------------------\n";
+                    break;
                 }
+                if(newname[i] != word)
+                {
+                	
+                	count += 1;
+				}
             }
+            if(count == 26)
+			{
+				cout << "Cannot found.\n";
+				cout << "--------------------------------------\n";
+			} 
+            
         }
         else
         {
